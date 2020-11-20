@@ -2,8 +2,9 @@
 import RealmSwift
 import UIKit
 
-class DetailViewController: UIViewController{
+final class DetailViewController: UIViewController{
     
+    // MARK: - Properties
     public var  item: ToDoListItem?
     public var deletionHandler: (() -> Void)?
     
@@ -18,6 +19,7 @@ class DetailViewController: UIViewController{
         return dateFormatter
     }()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +30,7 @@ class DetailViewController: UIViewController{
 
     }
     
+    // MARK: - Selectors
     @objc private func didTapDelete() {
         guard let myItem = self.item else {
             return

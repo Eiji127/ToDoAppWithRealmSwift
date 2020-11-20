@@ -2,14 +2,16 @@
 import RealmSwift
 import UIKit
 
-class EntryViewController: UIViewController, UITextFieldDelegate {
+final class EntryViewController: UIViewController{
     
+    // MARK: - Properties
+    @IBOutlet var textLabel: UILabel!
     @IBOutlet var textField: UITextField!
     @IBOutlet var datePicker: UIDatePicker!
-    
-    private let realm = try! Realm()
+    let realm = try! Realm()
     public var completionHandler: (() -> Void)?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,16 +20,9 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         datePicker.setDate(Date(), animated: true)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSaveButton))
-        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        return true
-        
-    }
-    
+    // MARK: - Selectors
     @objc func didTapSaveButton() {
         if let text = textField.text, !text.isEmpty {
             let date = datePicker.date
@@ -46,5 +41,13 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
             print("add something")
         }
     }
-
 }
+
+// MARK: - UITextFieldDelegate
+extension EntryViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+

@@ -6,4 +6,9 @@
 //  Copyright © 2020 AEG. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
+
+class ToDoListItem: Object {
+    @objc dynamic var item: String = ""
+    @objc dynamic var date: Date = Date()
+}
